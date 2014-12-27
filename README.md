@@ -1,4 +1,4 @@
-# Log Sink
+# Log Sink Server
 
 A log service, for streaming, storage and queries of log data
 
