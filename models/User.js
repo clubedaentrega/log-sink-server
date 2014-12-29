@@ -9,7 +9,8 @@ var schema = new mongoose.Schema({
 	// Application name (saved as Log origin field)
 	name: {
 		type: String,
-		index: true
+		index: true,
+		unique: true
 	},
 	// hex(sha256(user-key))
 	// There is no need for bcrypt(), pbkdf() or similar functions here

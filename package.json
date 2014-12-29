@@ -8,13 +8,10 @@
 		"type": "git",
 		"url": "https://github.com/sitegui/log-sink-server"
 	},
-	"keywords": [
-		"log",
-		"stream",
-		"mongodb"
-	],
+	"keywords": ["log", "stream", "mongodb"],
 	"dependencies": {
 		"asynconnection-node": "^0.1.0",
+		"commander": "^2.5.1",
 		"mongoose": "^3.8.21"
 	},
 	"license": "MIT",
