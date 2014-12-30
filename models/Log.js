@@ -17,6 +17,7 @@ var mongoose = require('mongoose'),
 	config = require('../config')
 
 function setModel(name, options) {
+	options.versionKey = false
 	var schema = new mongoose.Schema({
 		origin: {
 			type: String,

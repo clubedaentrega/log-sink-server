@@ -14,6 +14,9 @@ mongoose.connect(config.mongoUri)
 require('./models/Log')
 require('./models/User')
 
+// Log ourselves
+require('./lib/logger').info('run', process.argv.slice(2))
+
 // Set up program CLI
 fs.readdirSync('./lib/cli').forEach(function (file) {
 	if (/\.js$/.test(file)) {
