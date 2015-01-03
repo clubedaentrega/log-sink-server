@@ -16,15 +16,15 @@ The easiest way to get going is to clone the github repo, edit the `config.json`
 This service was created with some core design principles, explained bellow
 
 ### Streaming
-Using a model based on streaming data reduces overhead when compared to a request-response model, since there is no round-trip and one only connection is kept.
+Using a model based on streaming data reduces overhead when compared to request-response, since there is no round-trip and only one connection is kept open.
 
-Log-sink offers two live streams:
+Log sink offers two live streams:
 
-* for producers, to send log data to log-sik
-* for consumers, to receive log data routed by log-sink
+* for producers, to send log data this service
+* for consumers, to receive log data routed by this service
 
 ### Standard log format
-Log-sink does not enforce a rigid log format, but offers some standard fields that it optimizes for. Those fields are divided in two groups:
+Log sink does not enforce a rigid log format, but offers some standard fields that it optimizes for. Those fields are divided in two groups:
 
 * Required:
 	* origin: name of the app which created it (auto-filled for you)
@@ -38,10 +38,10 @@ Log-sink does not enforce a rigid log format, but offers some standard fields th
 
 Aside these standard fields, there is a 'anything fits' field, called `extra`.
 
-Use of standard fields is encouraged, since both transmission and query is much faster on them.
+Use of standard fields is encouraged, since both transmission and query is faster and slimmer on them.
 
 ### Relevance
-Log sink divide all log data in three groups, based on their relevance: bellow normal, normal and above normal. Logs with different relevance levels are stored and indexed separately, improving querying on them.
+Log sink divides all log data in three groups, based on their relevance: bellow normal, normal and above normal. Logs with different relevance level are stored and indexed separately, improving querying on them.
 
 This model was created to support a huge volume of not-so-relevant logs (eg, logs of pooling operations) mixed with some high-relevance logs (eg, logs of payments).
 
@@ -63,25 +63,25 @@ See CLI interface bellow for more.
 ## Storage
 Log sink uses mongoDB to store its data. This is a initial decision and may change in the future as we experiment with other tecnologies.
 
-Logs with different relevance levels are stored and indexed separately, improving querying on them. That is, logs are stored in three collections, based on their relevance.
+Logs with different relevance level are stored and indexed separately, improving querying on them. That is, logs are stored in three collections, based on their relevance.
 
 Bellow normal and normal relevance logs are stored in capped collections, in order to avoid a huge growth in used space. High relevance logs are stored in a normal collection, so they are never removed.
 
-The log sink software is not responsible for the database, it must be managed independently. The best topology is to use a replica set and set the [read preference](http://docs.mongodb.org/manual/core/read-preference/) to `secondaryPreferred`.
+The log sink software is not responsible for the database, it must be managed independently. The best topology is a replica set with the [read preference](http://docs.mongodb.org/manual/core/read-preference/) set to `'secondaryPreferred'`.
 
 ## API
 The API exposed by this service is built on top of [asynconnection](https://github.com/sitegui/asynconnection-core) protocol, a call-return/message protocol over tls.
 
 Note: we plan to add a subset of the API over HTTPS
 
-The API is split in three:
+The API is splitted in three:
 
 * [Write API](https://github.com/sitegui/log-sink-server/blob/master/api.md#write-api): used to send log data to log sink
 * [Stream API](https://github.com/sitegui/log-sink-server/blob/master/api.md#stream-api): streams live log data from producers to consumers
 * [Query API](https://github.com/sitegui/log-sink-server/blob/master/api.md#query-api): query old log data
 
 ## CLI
-The log sink server offers a command line interface (CLI) to manage users and permissions. The use it, run `node index [command] [args...]` in the project folder. (Use `node index -h` for inline help)
+The log sink server offers a command line interface (CLI) to manage users and permissions. To use it, run `node index [command] [args...]` in the project folder. (Use `node index -h` for inline help)
 
 The available commands are:
 
@@ -112,4 +112,4 @@ node index revoke-permission <user> <permission>
 ```
 
 ## Caveats
-Since mongoDB does not allow '.' and '$' in key names, there are [replaced](http://docs.mongodb.org/manual/faq/developers/#faq-dollar-sign-escaping) by '\uFF0E' (＄) and '\uFF04' (．) respectively. This only affects object key names in the extra field: `{a: 'a.b$c'}` is fine, but `{'a.b': 12}` will be saved as `{'a．b': 12}`
+Since mongoDB does not allow '$' and '.' in key names, they are [replaced](http://docs.mongodb.org/manual/faq/developers/#faq-dollar-sign-escaping) by '\uFF0E' (＄) and '\uFF04' (．) respectively. This only affects object key names in the extra field: `{a: 'a.b$c'}` is fine, but `{'a.b': 12}` will be saved as `{'a．b': 12}`

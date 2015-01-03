@@ -29,7 +29,7 @@ Any JSON-compatible data (number, string, boolean, null, array or object)
 ### call:1 - log(logData)
 `logData` is an object with the exact same fields as described above. The *only* difference between this call and the message is the call receives the feedback about the operation result.
 
-For example, if an application send a log with a missing required field (like date) via message (the method above), it will be silently ignored. Using the call (this method), it will get an error back.
+For example, if an application sends a log with a missing required field (like date) via message (the method above), it will be silently ignored. Using the call (this method), it will get an error back.
 
 For performance, use the message method. For debug, use the call method.
 
@@ -45,14 +45,14 @@ Create a new log stream. `options` is an object with the following fields:
 A name to give to this stream. This id will be used to shutdown the stream, for example
 * includeExtra: boolean  
 If you are interested in the `extra` field, set this to `true`. Otherwise, keep it `false` to reduce network usage and latency
-* filter: Filter  
+* filter: Object  
 Let's the application declare which logs it wants to receive. An object with:
 	* origin: string  
 	The producer's user name. This is the only required field. You must have read access to logs from that user. You can always read your own data.
 	* name: optional string  
 	An exact match for the log name
 	* nameRegex: optional regex  
-	A regex to match against the log name (ignore if `name` is present)
+	A regex to match against the log name (ignored if `name` is present)
 	* level: optional Range  
 	A range (see bellow) for the log level
 	* relevance: optional Range  
@@ -62,7 +62,7 @@ Let's the application declare which logs it wants to receive. An object with:
 	* message: optional string  
 	An exact match for the log message
 	* messageRegex: optional regex  
-	A regex to match against the log message (ignore if `message` is present)
+	A regex to match against the log message (ignored if `message` is present)
 	* commit: optional Buffer  
 	An exact match for the log commit field
 
@@ -74,7 +74,7 @@ If the stream is created successfully, the server will start sending `stream` (s
 Shutdown the stream (given its id as string). The returned boolean tells whether the stream was active.
 
 ### call:4 - unsetAllStreams()
-Shutdown all streams set by this connection. Streams createdd by other connections, even those under the same user/password, are not affected. There is no need to call this before closing the connection, the server will shutdown the streams by itself. In fact, this call is near useless.
+Shutdown all streams set by this connection. Streams created by other connections, even those under the same user/password, are not affected. There is no need to call this before closing the connection, the server will shutdown the streams by itself. In fact, this call is near useless.
 
 ### server-message:1 - stream(data)
 After a stream is set, the server will send these messages to the application.
@@ -110,9 +110,9 @@ At most, how many logs to return
 How much logs to skip. This is used to provide paginated results
 * sort: optional string
 The order used to return the logs. This is expressed as a space-separated string of field names. For example: `'time -message extra.myOwnField'` means order by `time` asc, then `message` desc then `extra.myOwnField` asc. The default is `'date'` (asc date)
-* query: object
+* query: Object
 	* origin: string
-	* date: object
+	* date: Object
 		* min: date
 		* max: optional date
 	* relevance: uint
@@ -128,10 +128,10 @@ The order used to return the logs. This is expressed as a space-separated string
 Note that `options.query` is very similiar to a stream filter, but with some important differences:
 
 * a start date must be informed in `date.min`
-* exactly one value must be queried for `relevance`, since logs with different relevances are not store together
+* exactly one value must be queried for `relevance`, since logs with different relevances are not stored together
 * the `extra` can also be queried. See the [official docs](http://docs.mongodb.org/manual/tutorial/query-documents/) for more on the syntax
 
-This call returns an array of logs, each element has:
+This call returns an array of logs, each element is an object with:
 
 * origin: string
 * date: date
