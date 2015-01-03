@@ -76,9 +76,9 @@ Note: we plan to add a subset of the API over HTTPS
 
 The API is split in three:
 
-* [Write API](https://github.com/sitegui/log-sink-server/blob/master/api.md): used to send log data to log sink
-* [Stream API](https://github.com/sitegui/log-sink-server/blob/master/api.md): streams live log data from producers to consumers
-* [Query API](https://github.com/sitegui/log-sink-server/blob/master/api.md): query old log data
+* [Write API](https://github.com/sitegui/log-sink-server/blob/master/api.md#write-api): used to send log data to log sink
+* [Stream API](https://github.com/sitegui/log-sink-server/blob/master/api.md#stream-api): streams live log data from producers to consumers
+* [Query API](https://github.com/sitegui/log-sink-server/blob/master/api.md#query-api): query old log data
 
 ## CLI
 The log sink server offers a command line interface (CLI) to manage users and permissions. The use it, run `node index [command] [args...]` in the project folder. (Use `node index -h` for inline help)
@@ -112,4 +112,4 @@ node index revoke-permission <user> <permission>
 ```
 
 ## Caveats
-Since mongoDB does not allow '.' and '$' in key names, there are replaced by '\uFF0E' (＄) and '\uFF04' (．) respectively. This only affects object key names in the extra field: `{a: 'a.b$c'}` is fine, but `{'a.b': 12}` will be saved as `{'a．b': 12}`
+Since mongoDB does not allow '.' and '$' in key names, there are [replaced](http://docs.mongodb.org/manual/faq/developers/#faq-dollar-sign-escaping) by '\uFF0E' (＄) and '\uFF04' (．) respectively. This only affects object key names in the extra field: `{a: 'a.b$c'}` is fine, but `{'a.b': 12}` will be saved as `{'a．b': 12}`
