@@ -4,6 +4,7 @@ var fs = require('fs')
 
 module.exports = {
 	// Capped collection size (in bytes)
+	// Set as false to not use capped collection
 	logSize: 1024 * 1024 * 1024,
 	// Mongo connection uri
 	mongoUri: 'mongodb://localhost:27017/logSink',

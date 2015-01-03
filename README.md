@@ -63,8 +63,53 @@ See CLI interface bellow for more.
 ## Storage
 Log sink uses mongoDB to store its data. This is a initial decision and may change in the future as we experiment with other tecnologies.
 
-*WIP*
+Logs with different relevance levels are stored and indexed separately, improving querying on them. That is, logs are stored in three collections, based on their relevance.
+
+Bellow normal and normal relevance logs are stored in capped collections, in order to avoid a huge growth in used space. High relevance logs are stored in a normal collection, so they are never removed.
+
+The log sink software is not responsible for the database, it must be managed independently. The best topology is to use a replica set and set the [read preference](http://docs.mongodb.org/manual/core/read-preference/) to `secondaryPreferred`.
 
 ## API
+The API exposed by this service is built on top of [asynconnection](https://github.com/sitegui/asynconnection-core) protocol, a call-return/message protocol over tls.
+
+Note: we plan to add a subset of the API over HTTPS
+
+The API is split in three:
+
+* [Write API](https://github.com/sitegui/log-sink-server/blob/master/api.md): used to send log data to log sink
+* [Stream API](https://github.com/sitegui/log-sink-server/blob/master/api.md): streams live log data from producers to consumers
+* [Query API](https://github.com/sitegui/log-sink-server/blob/master/api.md): query old log data
 
 ## CLI
+The log sink server offers a command line interface (CLI) to manage users and permissions. The use it, run `node index [command] [args...]` in the project folder. (Use `node index -h` for inline help)
+
+The available commands are:
+
+### add-user
+Add a new user to the system. All users can write data and read data created by itself. The user key (password) will be generated for you.
+```
+node index add-user <user>
+```
+### add-permission
+Add permission for a user to read data from another one
+```
+node index add-permission <user> <permission>
+```
+### change-key
+Generate another password for this user. Note that it never lets you pick you own password, to avoid human laziness resulting in stupid and weak password (sorry about that)
+```
+node index change-key <user>
+```
+### remove-user
+remove a user from the system (their log data will be kept)
+```
+node index remove-user <user>
+```
+### revoke-permission
+revoke a permission from a user to read data from another one
+```
+node index revoke-permission <user> <permission>
+```
+
+## Caveats
+Since mongoDB does not allow '.' and '$' in key names, there are replaced by '\uFF0E' (＄) and '\uFF04' (．) respectively. This only affects object key names in the extra field: `{a: 'a.b$c'}` is fine, but `{'a.b': 12}` will be saved as `{'a．b': 12}`
