@@ -12,7 +12,7 @@ The easiest way to get going is to clone the github repo, edit the `config.json`
 * save data for querying later
 * native support for secure connections (TLS)
 * simple and useful permission model
-* offer a simple (non-streaming) api over HTTP (*this is planned, not done*)
+* offer a simple (non-streaming) api over HTTPS
 
 ## Core concepts
 This service was created with some core design principles, explained bellow
@@ -74,13 +74,13 @@ The log sink software is not responsible for the database, it must be managed in
 ## API
 The API exposed by this service is built on top of [asynconnection](https://github.com/sitegui/asynconnection-core) protocol, a call-return/message protocol over tls.
 
-Note: we plan to add a subset of the API over HTTPS
-
 The API is splitted in three:
 
 * [Write API](https://github.com/sitegui/log-sink-server/blob/master/api.md#write-api): used to send log data to log sink
 * [Stream API](https://github.com/sitegui/log-sink-server/blob/master/api.md#stream-api): streams live log data from producers to consumers
 * [Query API](https://github.com/sitegui/log-sink-server/blob/master/api.md#query-api): query old log data
+
+The write API is also offered over HTTPS.
 
 ## CLI
 The log sink server offers a command line interface (CLI) to manage users and permissions. To use it, run `node index [command] [args...]` in the project folder. (Use `node index -h` for inline help)

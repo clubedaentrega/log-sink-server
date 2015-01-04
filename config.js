@@ -8,7 +8,11 @@ module.exports = {
 	logSize: 1024 * 1024 * 1024,
 	// Mongo connection uri
 	mongoUri: 'mongodb://localhost:27017/logSink',
-	// Socket options (will be passed to net.createServer or tls.createServer)
+	// Socket options for tls.createServer and https.createServer
+	// If set to an empty object `{}`, net.createServer and http.createServer are used
+	// It is recommended to use secure connection. If you choose to use plain text (like http),
+	// make sure no one can peek your network, because everything (including credentials) will
+	// be sent in the clear!
 	socket: {
 		// DO NOT USE THE EXAMPLE KEY/CERT since they were made public, ok?
 		key: fs.readFileSync('./keys/example-key.pem'),
