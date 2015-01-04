@@ -26,9 +26,18 @@ var options = {
 	port: config.port
 }
 
-module.exports.connect = function (done) {
+/**
+ * @param {string} [user='test']
+ * @param {Function} done
+ */
+module.exports.connect = function (user, done) {
 	var cntxt = new AC()
 
+	if (typeof user === 'function') {
+		done = user
+		user = 'test'
+	}
+	
 	// Write api
 	var writeLog = {
 		date: 'date',
@@ -65,6 +74,8 @@ module.exports.connect = function (done) {
 		id: 'string',
 		includeExtra: 'boolean',
 		log: log
+	}, function (data) {
+		this.emit('stream', data)
 	})
 
 	// Query api
@@ -96,7 +107,7 @@ module.exports.connect = function (done) {
 		done(err)
 	}
 	var peer = cntxt.connect(options, {
-		user: 'test',
+		user: user,
 		password: ''
 	}, function () {
 		peer.removeListener('error', onerror)
