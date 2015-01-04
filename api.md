@@ -46,8 +46,8 @@ The payload must be JSON-encoded and the `Content-Type` header must be set to `a
 
 The payload is an object with the same keys as listed above. The only differences are:
 
-* the `date` field is a string representation of the date, as defined by 'Combined date and time' [ISO-8601](http://en.wikipedia.org/wiki/ISO_8601)
-* the `commit` field is a string with the data hex-encoded, like: '069276428dc4594f82d298aa0c3ddbebc93f7928'.
+* the `date` field is a string representation of the date, as defined by 'Combined date and time' [ISO-8601](http://en.wikipedia.org/wiki/ISO_8601), like: `'2015-01-04T10:29:40.949Z'`
+* the `commit` field is a string with the data hex-encoded, like: `'069276428dc4594f82d298aa0c3ddbebc93f7928'`.
 
 The endpoint response will be a JSON formatted object with the keys:
 

@@ -1,7 +1,6 @@
 'use strict'
 
 var AC = require('asynconnection-node'),
-	mongoose = require('mongoose'),
 	commander = require('commander'),
 	fs = require('fs'),
 	http = require('http'),
@@ -12,9 +11,7 @@ var AC = require('asynconnection-node'),
 	command, server, httpServer
 
 // Set up mongoose
-mongoose.connect(config.mongoUri)
-require('./models/Log')
-require('./models/User')
+require('./mongoose')
 
 // Log ourselves
 require('./lib/logger').info('run', process.argv.slice(2))
@@ -28,6 +25,7 @@ fs.readdirSync('./lib/cli').forEach(function (file) {
 commander.on('*', function () {
 	throw new Error('Command not found')
 })
+commander.option('--enable-test-users', 'Enable the users "test" and "test2" (use it ONLY for running the test suite)')
 command = commander.parse(process.argv).args[0]
 
 if (!command) {
@@ -35,6 +33,10 @@ if (!command) {
 	// (but only if we're not executing any subcommand)
 	console.log()
 	console.log(new Date)
+
+	if (commander.enableTestUsers) {
+		console.log('!!! Test users enabled. Do not forget to turn this off after testing !!!')
+	}
 
 	require('./lib/api')(cntxt)
 	server = cntxt.createServer(config.socket, {

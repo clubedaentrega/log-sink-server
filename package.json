@@ -27,12 +27,11 @@
 	},
 	"scripts": {
 		"test": "mocha test",
-		"docs": "jsdoc -d docs -c docs.json -R README.md",
 		"start": "forever start -l forever.log -a -o out.log -e err.log index.js"
 	},
 	"devDependencies": {
-		"jsdoc": "^3.3.0-alpha13",
 		"mocha": "^2.1.0",
+		"request": "^2.51.0",
 		"should": "^4.4.1"
 	}
 }
