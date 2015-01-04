@@ -1,7 +1,7 @@
 # Log Sink Server
 A service for streaming, storage and query of log data.
 
-This is the server-side implementation. For a nodejs implementation of the client-side, see [log-sink](https://github.com/sitegui/log-sink).
+This is the server-side implementation. For a nodejs implementation of the client-side, see [log-sink](https://github.com/clubedaentrega/log-sink).
 
 ## Install
 The easiest way to get going is to clone the github repo, edit the `config.json` file and them `node index`.
@@ -76,9 +76,9 @@ The API exposed by this service is built on top of [asynconnection](https://gith
 
 The API is splitted in three:
 
-* [Write API](https://github.com/sitegui/log-sink-server/blob/master/api.md#write-api): used to send log data to log sink
-* [Stream API](https://github.com/sitegui/log-sink-server/blob/master/api.md#stream-api): streams live log data from producers to consumers
-* [Query API](https://github.com/sitegui/log-sink-server/blob/master/api.md#query-api): query old log data
+* [Write API](https://github.com/clubedaentrega/log-sink-server/blob/master/api.md#write-api): used to send log data to log sink
+* [Stream API](https://github.com/clubedaentrega/log-sink-server/blob/master/api.md#stream-api): streams live log data from producers to consumers
+* [Query API](https://github.com/clubedaentrega/log-sink-server/blob/master/api.md#query-api): query old log data
 
 The write API is also offered over HTTPS.
 

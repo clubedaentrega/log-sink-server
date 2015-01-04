@@ -1,7 +1,7 @@
 # Log Sink Server - API
 This file describes the public API of log sink server.
 
-As said in the [README](https://github.com/sitegui/log-sink-server/blob/master/README.md), the API is built on top of [asynconnection](https://github.com/sitegui/asynconnection-core) protocol, a call-return/message protocol over tls.
+As said in the [README](https://github.com/clubedaentrega/log-sink-server/blob/master/README.md), the API is built on top of [asynconnection](https://github.com/sitegui/asynconnection-core) protocol, a call-return/message protocol over tls.
 
 ## Write API
 This API is used to send logs to this service.
