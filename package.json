@@ -1,18 +1,25 @@
 {
 	"name": "log-sink-server",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"author": "Sitegui <sitegui@sitegui.com.br>",
-	"description": "A log service, for streaming, storage and queries of log data",
+	"description": "A service for streaming, storage and query of log data",
 	"main": "./index.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/sitegui/log-sink-server"
 	},
-	"keywords": ["log", "stream", "mongodb"],
+	"keywords": [
+		"log",
+		"stream",
+		"mongodb"
+	],
 	"dependencies": {
 		"asynconnection-node": "^0.1.0",
+		"body-parser": "^1.10.1",
 		"commander": "^2.5.1",
-		"mongoose": "^3.8.21"
+		"express": "^4.10.6",
+		"mongoose": "^3.8.21",
+		"validate-fields": "^1.3.0"
 	},
 	"license": "MIT",
 	"engines": {

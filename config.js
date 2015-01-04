@@ -14,6 +14,9 @@ module.exports = {
 		key: fs.readFileSync('./keys/example-key.pem'),
 		cert: fs.readFileSync('./keys/example-cert.pem')
 	},
-	// Port to bind to
-	port: 8018
+	// Port for the main API
+	port: 8018,
+	// Port for the simple HTTP API
+	// Set as null to disable it
+	httpPort: 8019
 }

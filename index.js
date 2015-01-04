@@ -4,10 +4,12 @@ var AC = require('asynconnection-node'),
 	mongoose = require('mongoose'),
 	commander = require('commander'),
 	fs = require('fs'),
+	http = require('http'),
+	https = require('https'),
 	config = require('./config'),
 	broadcast = require('./lib/broadcast'),
 	cntxt = new AC(),
-	command
+	command, server, httpServer
 
 // Set up mongoose
 mongoose.connect(config.mongoUri)
@@ -33,8 +35,9 @@ if (!command) {
 	// (but only if we're not executing any subcommand)
 	console.log()
 	console.log(new Date)
+
 	require('./lib/api')(cntxt)
-	var server = cntxt.createServer(config.socket, {
+	server = cntxt.createServer(config.socket, {
 		required: true,
 		handler: require('./lib/auth')
 	}, function (conn) {
@@ -49,4 +52,18 @@ if (!command) {
 	server.on('error', function (err) {
 		console.log('[Server error]', err)
 	})
+
+	if (config.httpPort) {
+		if (config.socket.pfx || config.socket.key || config.socket.cert) {
+			httpServer = https.createServer(config.socket, require('./lib/api/http'))
+		} else {
+			httpServer = http.createServer(require('./lib/api/http'))
+		}
+		httpServer.listen(config.httpPort, function () {
+			console.log('HTTP server listening on port ' + config.httpPort)
+		})
+		httpServer.on('error', function (err) {
+			console.log('[HTTP server error]', err)
+		})
+	}
 }

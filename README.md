@@ -1,5 +1,7 @@
 # Log Sink Server
-A log service, for streaming, storage and queries of log data
+A service for streaming, storage and query of log data.
+
+This is the server-side implementation. For a nodejs implementation of the client-side, see [log-sink](https://github.com/sitegui/log-sink).
 
 ## Install
 The easiest way to get going is to clone the github repo, edit the `config.json` file and them `node index`.
