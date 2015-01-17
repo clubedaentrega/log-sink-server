@@ -4,7 +4,9 @@ A service for streaming, storage and query of log data.
 This is the server-side implementation. For a nodejs implementation of the client-side, see [log-sink](https://github.com/clubedaentrega/log-sink).
 
 ## Install
-The easiest way to get going is to clone the github repo, edit the `config.json` file and them `node index`.
+1. Clone [the repo](https://github.com/clubedaentrega/log-sink-server)
+2. Copy the file `example-config.js` to `config.js` and edit what you want
+3. Start with `node index` or, if you have `forever`, `npm start`
 
 ## Features
 * accept incoming stream of log data from producers
@@ -115,3 +117,7 @@ node index revoke-permission <user> <permission>
 
 ## Caveats
 Since mongoDB does not allow '$' and '.' in key names, they are [replaced](http://docs.mongodb.org/manual/faq/developers/#faq-dollar-sign-escaping) by '\uFF0E' (＄) and '\uFF04' (．) respectively. This only affects object key names in the extra field: `{a: 'a.b$c'}` is fine, but `{'a.b': 12}` will be saved as `{'a．b': 12}`
+
+## Running the test suite
+1. In a console window, run `node index --test-mode` to start the server in test mode
+2. In another window, run `npm test`

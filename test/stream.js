@@ -4,7 +4,7 @@
 var should = require('should'),
 	utils = require('./utils')
 
-describe('write API', function () {
+describe('stream API', function () {
 	var peer, peer2
 	before(function (done) {
 		utils.connect(function (err, peer_) {

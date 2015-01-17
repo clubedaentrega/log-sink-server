@@ -4,7 +4,7 @@
 var should = require('should'),
 	utils = require('./utils')
 
-describe('write API', function () {
+describe('query API', function () {
 	var log = {
 			origin: 'test',
 			date: new Date,

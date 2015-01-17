@@ -1,7 +1,7 @@
 'use strict'
 
-var config = require('../../config'),
-	AC = require('asynconnection-node')
+var config = require('../../example-config'),
+	AC = require('asynconnection')
 
 var range = {
 	'min?': 'uint',

@@ -19,8 +19,12 @@ module.exports = {
 		cert: fs.readFileSync('./keys/example-cert.pem')
 	},
 	// Port for the main API
+	// `null` disables it
 	port: 8018,
+	// Port for the main API over WebSocket
+	// `null` disables it
+	wsPort: 8019,
 	// Port for the simple HTTP API
 	// Set as null to disable it
-	httpPort: 8019
+	httpPort: 8020
 }
