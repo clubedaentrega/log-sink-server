@@ -23,7 +23,8 @@ var log = {
 var options = {
 	secure: Boolean(config.socket.cert),
 	ca: config.socket.cert,
-	port: config.port
+	port: config.port,
+	host: 'localhost'
 }
 
 /**
@@ -37,7 +38,7 @@ module.exports.connect = function (user, done) {
 		done = user
 		user = 'test'
 	}
-	
+
 	// Write api
 	var writeLog = {
 		date: 'date',
@@ -101,7 +102,7 @@ module.exports.connect = function (user, done) {
 		'skip?': 'uint',
 		'sort?': 'string'
 	}, [log])
-	
+
 	// Connect and translate to done(err, peer)
 	var onerror = function (err) {
 		done(err)
