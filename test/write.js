@@ -53,7 +53,7 @@ describe('write API', function () {
 				sendImmediately: true
 			}
 		}, function (err, _, result) {
-			should(err).be.null
+			should(err).be.null()
 			result.should.be.eql({
 				ok: true
 			})
@@ -65,7 +65,7 @@ describe('write API', function () {
 		Log.find({
 			origin: 'test'
 		}).sort('-_id').limit(3).lean().select('-_id').exec(function (err, logs) {
-			should(err).be.null
+			should(err).be.null()
 			logs.should.have.length(3)
 			logs[0].should.be.eql(logs[1])
 			logs[0].should.be.eql(logs[2])

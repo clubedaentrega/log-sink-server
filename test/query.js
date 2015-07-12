@@ -22,7 +22,7 @@ describe('query API', function () {
 		peer
 	before(function (done) {
 		utils.connect(function (err, peer_) {
-			should(err).be.null
+			should(err).be.null()
 			peer = peer_
 			peer.send('log', log)
 			done()
@@ -58,7 +58,7 @@ describe('query API', function () {
 			},
 			limit: 1
 		}, function (err, logs) {
-			should(err).be.null
+			should(err).be.null()
 			logs.should.have.length(1)
 			logs[0].should.be.eql(log)
 			done()

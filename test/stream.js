@@ -8,10 +8,10 @@ describe('stream API', function () {
 	var peer, peer2
 	before(function (done) {
 		utils.connect(function (err, peer_) {
-			should(err).be.null
+			should(err).be.null()
 			peer = peer_
 			utils.connect('test2', function (err, peer_) {
-				should(err).be.null
+				should(err).be.null()
 				peer2 = peer_
 				done()
 			})
@@ -40,7 +40,7 @@ describe('stream API', function () {
 				origin: 'test'
 			}
 		}, function (err) {
-			should(err).be.null
+			should(err).be.null()
 			peer.call('setStream', {
 				id: 'another',
 				includeExtra: false,
@@ -48,7 +48,7 @@ describe('stream API', function () {
 					origin: 'test2'
 				}
 			}, function (err) {
-				should(err).be.null
+				should(err).be.null()
 				done()
 			})
 		})
@@ -56,11 +56,11 @@ describe('stream API', function () {
 
 	it('should be able to shutdown streams', function (done) {
 		peer.call('unsetStream', 'myself', function (err, ok) {
-			should(err).be.null
-			ok.should.be.true
+			should(err).be.null()
+			ok.should.be.true()
 			peer.call('unsetStream', 'myself', function (err, ok) {
-				should(err).be.null
-				ok.should.be.false
+				should(err).be.null()
+				ok.should.be.false()
 				done()
 			})
 		})
@@ -74,7 +74,7 @@ describe('stream API', function () {
 			relevance: 0
 		}
 		peer.once('stream', function (data) {
-			data.includeExtra.should.be.false
+			data.includeExtra.should.be.false()
 			data.id.should.be.equal('another')
 			data.log.should.be.eql({
 				commit: undefined,
