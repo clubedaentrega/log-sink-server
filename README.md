@@ -104,6 +104,11 @@ Generate another password for this user. Note that it never lets you pick you ow
 ```
 node index change-key <user>
 ```
+### list-users
+List all users and their permissions
+```
+node index list-users
+```
 ### remove-user
 remove a user from the system (their log data will be kept)
 ```
