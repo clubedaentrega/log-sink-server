@@ -103,6 +103,9 @@ module.exports.connect = function (user, done) {
 		'sort?': 'string'
 	}, [log])
 
+	// Meta api
+	cntxt.addClientCall(6, 'getPermissions', null, ['string'])
+
 	// Connect and translate to done(err, peer)
 	var onerror = function (err) {
 		done(err)

@@ -163,3 +163,10 @@ This call returns an array of logs, each element is an object with:
 * `message`: optional string
 * `commit`: optional Buffer
 * `extra`: optional json
+
+## Meta API
+The meta API is used to get data about log sink service itself
+
+### call:6 - getPermissions() -> permissions
+
+Ask about the permissions the current user has. `permissions` is an array of strings. The user name will be included in the answer and will always be the first element of the array.
