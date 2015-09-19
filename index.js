@@ -7,6 +7,9 @@ var commander = require('commander'),
 // Set up mongoose
 require('./mongoose')
 
+// Set up reporter
+require('./lib/reporter')
+
 // Log ourselves
 require('./lib/logger').info('run', process.argv.slice(2))
 

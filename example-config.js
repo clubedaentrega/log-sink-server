@@ -6,6 +6,9 @@ module.exports = {
 	// Capped collection size (in bytes)
 	// Set as false to not use capped collection
 	logSize: 1024 * 1024 * 1024,
+	// Interval to generate internal statistics about log sink server usage
+	// Set to 0 to disable
+	reportInterval: 3600e3,
 	// Mongo connection uri
 	mongoUri: 'mongodb://localhost:27017/logSink',
 	// Socket options for tls.createServer and https.createServer
