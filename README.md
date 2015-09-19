@@ -106,7 +106,7 @@ Generate another password for this user. Note that it never lets you pick you ow
 node index change-key <user>
 ```
 ### list-users
-List all users and their permissions
+List all users, their permissions and last login datetime
 ```
 node index list-users
 ```
