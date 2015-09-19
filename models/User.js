@@ -18,7 +18,9 @@ var schema = new mongoose.Schema({
 	// Instead, user-key is a full entropy 256-bit key
 	key: Buffer,
 	// Other app's log this one can read
-	canRead: [String]
+	canRead: [String],
+	// Last time this user did log in
+	lastLogin: Date
 })
 
 /**
