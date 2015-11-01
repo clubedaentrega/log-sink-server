@@ -77,7 +77,7 @@ describe('write API', function () {
 				level: log.level,
 				time: log.time,
 				message: log.message,
-				commit: log.commit,
+				commit: new Buffer(log.commit),
 				extra: log.extra
 			})
 			done()
