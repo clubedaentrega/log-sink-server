@@ -6,7 +6,7 @@ var should = require('should'),
 	mongoose = require('../mongoose'),
 	Log = mongoose.model('Log1'),
 	request = require('request'),
-	config = require('../example-config')
+	config = require('../config')
 
 describe('write API', function () {
 	var peer
