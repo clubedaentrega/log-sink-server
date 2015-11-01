@@ -1,3 +1,8 @@
+# 3.0.0
+
+## Breaking change (possibly)
+Logs created by log-sink itself are stored as low priority now (it was normal before)
+
 # 2.0.0
 
 ## Breaking change
