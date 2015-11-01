@@ -1,7 +1,7 @@
 'use strict'
 
 var mongoose = require('mongoose'),
-	config = require('./config')
+	config = require('./getConfig')
 
 mongoose.connect(config.mongoUri)
 require('./models/Log')

@@ -14,7 +14,7 @@
 'use strict'
 
 var mongoose = require('mongoose'),
-	config = require('../config')
+	config = require('../getConfig')
 
 function setModel(name, options) {
 	options.versionKey = false
