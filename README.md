@@ -1,6 +1,6 @@
 # Log Sink Server
-[![Build Status](https://travis-ci.org/clubedaentrega/lift-it.svg?branch=master)](https://travis-ci.org/clubedaentrega/lift-it)
-[![Dependency Status](https://david-dm.org/clubedaentrega/lift-it.svg)](https://david-dm.org/clubedaentrega/lift-it)
+[![Build Status](https://travis-ci.org/clubedaentrega/log-sink-server.svg?branch=master)](https://travis-ci.org/clubedaentrega/log-sink-server)
+[![Dependency Status](https://david-dm.org/clubedaentrega/log-sink-server.svg)](https://david-dm.org/clubedaentrega/log-sink-server)
 
 A service for streaming, storage and query of log data.
 
