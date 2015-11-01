@@ -1,5 +1,7 @@
 language: node_js
-before_script: "node . --test-mode &"
+before_script:
+  - "cp example-config.js config.js"
+  - "node . --test-mode &"
 node_js:
   - "0.12"
   - "4.2.1"

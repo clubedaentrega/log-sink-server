@@ -1,6 +1,6 @@
 'use strict'
 
-var config = require('../../example-config'),
+var config = require('../../config'),
 	AC = require('asynconnection')
 
 var range = {
