@@ -5,5 +5,5 @@ before_script:
   - "node . --test-mode &"
 node_js:
   - "0.12"
-  - "4.2.1"
+  - "4.2"
   - "node"

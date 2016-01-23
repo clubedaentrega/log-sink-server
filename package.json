@@ -1,6 +1,6 @@
 {
 	"name": "log-sink-server",
-	"version": "3.0.0",
+	"version": "4.0.0",
 	"author": "Sitegui <sitegui@sitegui.com.br>",
 	"description": "A service for streaming, storage and query of log data",
 	"main": "./index.js",
@@ -17,12 +17,12 @@
 	],
 	"dependencies": {
 		"asynconnection": "^0.1.0",
-		"body-parser": "^1.14.1",
+		"body-parser": "^1.14.2",
 		"chalk": "^1.1.1",
 		"commander": "^2.9.0",
-		"express": "^4.13.3",
-		"mongoose": "^4.2.3",
-		"validate-fields": "^3.3.1"
+		"express": "^4.13.4",
+		"mongoose": "^4.3.6",
+		"validate-fields": "^3.4.0"
 	},
 	"license": "MIT",
 	"engines": {
@@ -30,11 +30,11 @@
 	},
 	"scripts": {
 		"test": "mocha test",
-		"start": "forever start -l forever.log -a -o out.log -e err.log index.js"
+		"start": "pm2 startOrRestart pm2.json"
 	},
 	"devDependencies": {
-		"mocha": "^2.3.3",
-		"request": "^2.65.0",
-		"should": "^7.1.1"
+		"mocha": "^2.3.4",
+		"request": "^2.67.0",
+		"should": "^8.1.1"
 	}
 }

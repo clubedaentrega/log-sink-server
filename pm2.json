@@ -1,0 +1,6 @@
+{
+	"name": "log-sink-server",
+	"script": "index.js",
+	"min_uptime": "5m",
+	"max_restarts": 5
+}

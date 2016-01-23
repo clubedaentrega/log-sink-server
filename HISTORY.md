@@ -1,3 +1,11 @@
+# 4.0.0
+
+## Breaking change
+`npm start` now uses `pm2` instead of `forever`
+
+## Other changes
+* Updated dependencies
+
 # 3.0.0
 
 ## Breaking change (possibly)
