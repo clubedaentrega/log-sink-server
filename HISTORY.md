@@ -1,3 +1,6 @@
+# 4.1.0
+* Changed: updated mongoose to 4.4
+
 # 4.0.0
 
 ## Breaking change
