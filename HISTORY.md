@@ -1,3 +1,7 @@
+# 4.1.1
+* Changed: update dependencies
+* Changed: successful queries are no longer logger, to reduce the volume of meta-logs
+
 # 4.1.0
 * Changed: updated mongoose to 4.4
 
