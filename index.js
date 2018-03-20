@@ -1,6 +1,6 @@
 'use strict'
 
-var commander = require('commander'),
+let commander = require('commander'),
 	fs = require('fs'),
 	command
 
@@ -14,12 +14,12 @@ require('./lib/reporter')
 require('./lib/logger').info('run', process.argv.slice(2))
 
 // Set up program CLI
-fs.readdirSync('./lib/cli').forEach(function (file) {
+fs.readdirSync('./lib/cli').forEach(file => {
 	if (/\.js$/.test(file)) {
 		require('./lib/cli/' + file)
 	}
 })
-commander.on('*', function () {
+commander.on('*', () => {
 	throw new Error('Command not found')
 })
 commander.option('--test-mode', 'Disable password for users "test" and "test2" (use it ONLY for running the test suite)')

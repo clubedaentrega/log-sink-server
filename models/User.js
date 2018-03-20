@@ -3,9 +3,9 @@
  */
 'use strict'
 
-var mongoose = require('mongoose')
+let mongoose = require('mongoose')
 
-var schema = new mongoose.Schema({
+let schema = new mongoose.Schema({
 	// Application name (saved as Log origin field)
 	name: {
 		type: String,

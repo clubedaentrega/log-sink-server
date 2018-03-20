@@ -10,9 +10,7 @@
 		"no-constant-condition": ["error", {
 			"checkLoops": false
 		}],
-		"no-console": ["error", {
-			"allow": ["warn", "error"]
-		}],
+		"no-console": "off",
 		// Additional rules that required changes
 		"array-callback-return": ["error", {
 			"allowImplicit": true

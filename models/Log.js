@@ -4,7 +4,7 @@
  * * Log0: low-relevance logs, capped
  * * Log1: normal logs, capped
  * * Log2: high-relevance logs
- * 
+ *
  * All them have the same schema:
  * * Required basic fields: origin, date, name, level
  * * Optional basic fields: time, message, commit
@@ -13,12 +13,12 @@
  */
 'use strict'
 
-var mongoose = require('mongoose'),
+let mongoose = require('mongoose'),
 	config = require('../config')
 
 function setModel(name, options) {
 	options.versionKey = false
-	var schema = new mongoose.Schema({
+	let schema = new mongoose.Schema({
 		origin: {
 			type: String,
 			required: true

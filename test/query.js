@@ -1,18 +1,18 @@
-/*globals describe, before, it, after*/
+/* globals describe, before, it, after*/
 'use strict'
 
-var should = require('should'),
+let should = require('should'),
 	utils = require('./utils')
 
-describe('query API', function () {
-	var log = {
+describe('query API', () => {
+	let log = {
 			origin: 'test',
 			date: new Date,
 			name: 'name',
 			level: 1,
 			relevance: 1,
 			message: 'Hello World',
-			commit: new Buffer([3, 14, 15, 92, 65, 35]),
+			commit: Buffer.from([3, 14, 15, 92, 65, 35]),
 			time: 17,
 			extra: {
 				file: 'query.js',
@@ -20,8 +20,8 @@ describe('query API', function () {
 			}
 		},
 		peer
-	before(function (done) {
-		utils.connect(function (err, peer_) {
+	before(done => {
+		utils.connect((err, peer_) => {
 			should(err).be.null()
 			peer = peer_
 			peer.send('log', log)
@@ -29,7 +29,7 @@ describe('query API', function () {
 		})
 	})
 
-	it('should check for permission', function (done) {
+	it('should check for permission', done => {
 		peer.call('query', {
 			includeExtra: false,
 			query: {
@@ -40,13 +40,13 @@ describe('query API', function () {
 				relevance: 1
 			},
 			limit: 1
-		}, function (err) {
+		}, err => {
 			err.message.should.be.equal('You do not have permission to read data from this origin')
 			done()
 		})
 	})
 
-	it('should run the given query', function (done) {
+	it('should run the given query', done => {
 		peer.call('query', {
 			includeExtra: true,
 			query: {
@@ -57,7 +57,7 @@ describe('query API', function () {
 				relevance: 1
 			},
 			limit: 1
-		}, function (err, logs) {
+		}, (err, logs) => {
 			should(err).be.null()
 			logs.should.have.length(1)
 			logs[0].should.be.eql(log)
@@ -65,7 +65,7 @@ describe('query API', function () {
 		})
 	})
 
-	after(function (done) {
+	after(done => {
 		peer.once('close', done)
 		peer.close()
 	})

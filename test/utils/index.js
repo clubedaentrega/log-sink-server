@@ -1,14 +1,14 @@
 'use strict'
 
-var config = require('../../config'),
+let config = require('../../config'),
 	AC = require('asynconnection')
 
-var range = {
+let range = {
 	'min?': 'uint',
 	'max?': 'uint'
 }
 
-var log = {
+let log = {
 	origin: 'string',
 	date: 'date',
 	name: 'string',
@@ -20,7 +20,7 @@ var log = {
 	'extra?': 'json'
 }
 
-var options = {
+let options = {
 	secure: Boolean(config.socket.cert),
 	ca: config.socket.cert,
 	port: config.port,
@@ -32,7 +32,7 @@ var options = {
  * @param {Function} done
  */
 module.exports.connect = function (user, done) {
-	var cntxt = new AC()
+	let cntxt = new AC()
 
 	if (typeof user === 'function') {
 		done = user
@@ -40,7 +40,7 @@ module.exports.connect = function (user, done) {
 	}
 
 	// Write api
-	var writeLog = {
+	let writeLog = {
 		date: 'date',
 		name: 'string',
 		level: 'uint',
@@ -74,7 +74,7 @@ module.exports.connect = function (user, done) {
 	cntxt.addServerMessage(1, 'stream', {
 		id: 'string',
 		includeExtra: 'boolean',
-		log: log
+		log
 	}, function (data) {
 		this.emit('stream', data)
 	})
@@ -107,13 +107,13 @@ module.exports.connect = function (user, done) {
 	cntxt.addClientCall(6, 'getPermissions', null, ['string'])
 
 	// Connect and translate to done(err, peer)
-	var onerror = function (err) {
+	function onerror(err) {
 		done(err)
 	}
-	var peer = cntxt.connect(options, {
-		user: user,
+	let peer = cntxt.connect(options, {
+		user,
 		password: ''
-	}, function () {
+	}, () => {
 		peer.removeListener('error', onerror)
 		done(null, peer)
 	})

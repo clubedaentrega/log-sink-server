@@ -1,16 +1,16 @@
-/*globals describe, before, it, after*/
+/* globals describe, before, it, after*/
 'use strict'
 
-var should = require('should'),
+let should = require('should'),
 	utils = require('./utils')
 
-describe('stream API', function () {
-	var peer, peer2
-	before(function (done) {
-		utils.connect(function (err, peer_) {
+describe('stream API', () => {
+	let peer, peer2
+	before(done => {
+		utils.connect((err, peer_) => {
 			should(err).be.null()
 			peer = peer_
-			utils.connect('test2', function (err, peer_) {
+			utils.connect('test2', (err, peer_) => {
 				should(err).be.null()
 				peer2 = peer_
 				done()
@@ -18,7 +18,7 @@ describe('stream API', function () {
 		})
 	})
 
-	it('should verify permissions', function (done) {
+	it('should verify permissions', done => {
 		// test2 can't read from test
 		peer2.call('setStream', {
 			id: 'x',
@@ -26,20 +26,20 @@ describe('stream API', function () {
 			filter: {
 				origin: 'test'
 			}
-		}, function (err) {
+		}, err => {
 			err.message.should.be.equal('You do not have permission to read data from this origin')
 			done()
 		})
 	})
 
-	it('should create streams', function (done) {
+	it('should create streams', done => {
 		peer.call('setStream', {
 			id: 'myself',
 			includeExtra: false,
 			filter: {
 				origin: 'test'
 			}
-		}, function (err) {
+		}, err => {
 			should(err).be.null()
 			peer.call('setStream', {
 				id: 'another',
@@ -47,18 +47,18 @@ describe('stream API', function () {
 				filter: {
 					origin: 'test2'
 				}
-			}, function (err) {
+			}, err => {
 				should(err).be.null()
 				done()
 			})
 		})
 	})
 
-	it('should be able to shutdown streams', function (done) {
-		peer.call('unsetStream', 'myself', function (err, ok) {
+	it('should be able to shutdown streams', done => {
+		peer.call('unsetStream', 'myself', (err, ok) => {
 			should(err).be.null()
 			ok.should.be.true()
-			peer.call('unsetStream', 'myself', function (err, ok) {
+			peer.call('unsetStream', 'myself', (err, ok) => {
 				should(err).be.null()
 				ok.should.be.false()
 				done()
@@ -66,14 +66,14 @@ describe('stream API', function () {
 		})
 	})
 
-	it('should stream logs', function (done) {
-		var log = {
+	it('should stream logs', done => {
+		let log = {
 			date: new Date,
 			name: 'name',
 			level: 4,
 			relevance: 0
 		}
-		peer.once('stream', function (data) {
+		peer.once('stream', data => {
 			data.includeExtra.should.be.false()
 			data.id.should.be.equal('another')
 			data.log.should.be.eql({
@@ -92,8 +92,8 @@ describe('stream API', function () {
 		peer2.send('log', log)
 	})
 
-	after(function (done) {
-		peer.once('close', function () {
+	after(done => {
+		peer.once('close', () => {
 			peer2.once('close', done)
 			peer2.close()
 		})

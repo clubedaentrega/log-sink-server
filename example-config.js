@@ -1,6 +1,6 @@
 'use strict'
 
-var fs = require('fs')
+let fs = require('fs')
 
 module.exports = {
 	// Capped collection size (in bytes)

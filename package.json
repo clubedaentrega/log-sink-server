@@ -29,7 +29,7 @@
 		"node": ">=8"
 	},
 	"scripts": {
-		"test": "mocha test",
+		"test": "mocha test --exit",
 		"start": "pm2 startOrRestart pm2.json"
 	},
 	"devDependencies": {

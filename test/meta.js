@@ -1,28 +1,28 @@
-/*globals describe, before, it, after*/
+/* globals describe, before, it, after*/
 'use strict'
 
-var should = require('should'),
+let should = require('should'),
 	utils = require('./utils')
 
-describe('meta API', function () {
-	var peer
-	before(function (done) {
-		utils.connect(function (err, peer_) {
+describe('meta API', () => {
+	let peer
+	before(done => {
+		utils.connect((err, peer_) => {
 			should(err).be.null()
 			peer = peer_
 			done()
 		})
 	})
 
-	it('should get permissions', function (done) {
-		peer.call('getPermissions', function (err, permissions) {
+	it('should get permissions', done => {
+		peer.call('getPermissions', (err, permissions) => {
 			should(err).be.null()
 			permissions.should.be.eql(['test', 'test2'])
 			done()
 		})
 	})
 
-	after(function (done) {
+	after(done => {
 		peer.once('close', done)
 		peer.close()
 	})

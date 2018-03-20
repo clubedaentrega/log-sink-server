@@ -1,30 +1,30 @@
-/*globals describe, before, it, after*/
+/* globals describe, before, it, after*/
 'use strict'
 
-var should = require('should'),
+let should = require('should'),
 	utils = require('./utils'),
 	mongoose = require('../mongoose'),
 	Log = mongoose.model('Log1'),
 	request = require('request'),
 	config = require('../config')
 
-describe('write API', function () {
-	var peer
-	before(function (done) {
-		utils.connect(function (err, peer_) {
+describe('write API', () => {
+	let peer
+	before(done => {
+		utils.connect((err, peer_) => {
 			peer = peer_
 			done(err)
 		})
 	})
 
-	var log = {
+	let log = {
 		date: new Date,
 		name: 'name',
 		level: 2,
 		relevance: 1,
 		time: 17,
 		message: 'message',
-		commit: new Buffer([3, 14, 15]),
+		commit: Buffer.from([3, 14, 15]),
 		extra: {
 			'my-extra': [92, 65]
 		}
@@ -33,15 +33,15 @@ describe('write API', function () {
 		return this.toString('hex')
 	}
 
-	it('should accept the write message', function () {
+	it('should accept the write message', () => {
 		peer.send('log', log)
 	})
 
-	it('should return success for the write call', function (done) {
+	it('should return success for the write call', done => {
 		peer.call('log', log, done)
 	})
 
-	it('should accept logs by http', function (done) {
+	it('should accept logs by http', done => {
 		request({
 			url: 'https://localhost:' + config.httpPort + '/log',
 			json: log,
@@ -52,7 +52,7 @@ describe('write API', function () {
 				pass: '',
 				sendImmediately: true
 			}
-		}, function (err, _, result) {
+		}, (err, _, result) => {
 			should(err).be.null()
 			result.should.be.eql({
 				ok: true
@@ -61,10 +61,11 @@ describe('write API', function () {
 		})
 	})
 
-	it('should have inserted the logs', function (done) {
+	it('should have inserted the logs', done => {
 		Log.find({
 			origin: 'test'
-		}).sort('-_id').limit(3).lean().select('-_id').exec(function (err, logs) {
+		}).sort('-_id').limit(3).lean().select('-_id').exec((err, logs) => {
+			console.log(err, logs)
 			should(err).be.null()
 			logs.should.have.length(3)
 			logs[0].should.be.eql(logs[1])
@@ -77,14 +78,14 @@ describe('write API', function () {
 				level: log.level,
 				time: log.time,
 				message: log.message,
-				commit: new Buffer(log.commit),
+				commit: Buffer.from(log.commit),
 				extra: log.extra
 			})
 			done()
 		})
 	})
 
-	after(function (done) {
+	after(done => {
 		peer.once('close', done)
 		peer.close()
 	})

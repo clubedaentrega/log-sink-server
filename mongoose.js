@@ -1,6 +1,6 @@
 'use strict'
 
-var mongoose = require('mongoose'),
+let mongoose = require('mongoose'),
 	config = require('./config')
 
 mongoose.connect(config.mongoUri)
