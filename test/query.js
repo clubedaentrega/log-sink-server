@@ -20,12 +20,12 @@ describe('query API', () => {
 			}
 		},
 		peer
+
 	before(done => {
 		utils.connect((err, peer_) => {
 			should(err).be.null()
 			peer = peer_
-			peer.send('log', log)
-			done()
+			peer.call('log', log, done)
 		})
 	})
 
