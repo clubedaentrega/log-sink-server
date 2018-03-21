@@ -3,7 +3,7 @@
 
 let should = require('should'),
 	utils = require('./utils'),
-	mongoose = require('../mongoose'),
+	mongoose = require('mongoose'),
 	Log = mongoose.model('Log1'),
 	request = require('request'),
 	config = require('../config')
@@ -65,7 +65,6 @@ describe('write API', () => {
 		Log.find({
 			origin: 'test'
 		}).sort('-_id').limit(3).lean().select('-_id').exec((err, logs) => {
-			console.log(err, logs)
 			should(err).be.null()
 			logs.should.have.length(3)
 			logs[0].should.be.eql(logs[1])

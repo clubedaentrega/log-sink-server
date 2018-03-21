@@ -3,8 +3,10 @@
 let mongoose = require('mongoose'),
 	config = require('./config')
 
-mongoose.connect(config.mongoUri)
 require('./models/Log')
 require('./models/User')
 
-module.exports = mongoose
+module.exports.start = callback => {
+	mongoose.connect(config.mongoUri)
+	mongoose.connection.once('connected', callback)
+}
