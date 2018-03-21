@@ -1,3 +1,9 @@
+# 5.0.0
+
+## Breaking changes
+* Drop support for Node.JS < 6
+* Add support for MongoDB 3.6
+
 # 4.1.1
 * Changed: update dependencies
 * Changed: successful queries are no longer logger, to reduce the volume of meta-logs

@@ -1,6 +1,6 @@
 {
 	"name": "log-sink-server",
-	"version": "4.1.1",
+	"version": "5.0.0",
 	"author": "Sitegui <sitegui@sitegui.com.br>",
 	"description": "A service for streaming, storage and query of log data",
 	"main": "./index.js",
@@ -27,7 +27,7 @@
 	},
 	"license": "MIT",
 	"engines": {
-		"node": ">=8"
+		"node": ">=6"
 	},
 	"scripts": {
 		"test": "mocha test --exit -t 10000",

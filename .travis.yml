@@ -4,6 +4,6 @@ before_script:
   - "cp example-config.js config.js"
   - "node . --test-mode &"
 node_js:
-  - "0.12"
-  - "4.2"
+  - "6"
+  - "8"
   - "node"

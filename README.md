@@ -126,7 +126,3 @@ node index revoke-permission <user> <permission>
 
 ## Caveats
 Since mongoDB does not allow '$' and '.' in key names, they are [replaced](http://docs.mongodb.org/manual/faq/developers/#faq-dollar-sign-escaping) by '\uFF0E' (＄) and '\uFF04' (．) respectively. This only affects object key names in the extra field: `{a: 'a.b$c'}` is fine, but `{'a.b': 12}` will be saved as `{'a．b': 12}`
-
-## Running the test suite
-1. In a console window, run `node index --test-mode` to start the server in test mode
-2. In another window, run `npm test`
